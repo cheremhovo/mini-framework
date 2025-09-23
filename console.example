@@ -1,0 +1,20 @@
+Примеры часто используемых команд
+
+docker-compose logs -f nginx
+docker-compose exec php bash
+docker-compose cp php:/usr/local/etc php
+sudo cp html.conf /etc/nginx/conf.d/
+sudo echo "127.0.0.1 html.local" >> /etc/hosts
+sudo nginx -t
+sudo nginx -s reload
+sudo ln -fs /usr/bin/php7.4 /etc/alternatives/php
+sudo ln -fs /usr/bin/php8.4 /etc/alternatives/php
+
+Примеры css
+
+sass input.scss output.css   ///
+lessc input.scss output.css
+
+Примеры php
+
+php -S 0.0.0.0:8080
