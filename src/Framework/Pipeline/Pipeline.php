@@ -1,20 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cheremhovo1990\Framework\Pipeline;
 
-use Cheremhovo1990\Framework\CallableMiddlewareWrapper;
-use Psr\Container\ContainerInterface;
+use Cheremhovo1990\Framework\Http\CallableMiddlewareWrapper;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 class Pipeline
 {
-    private ContainerInterface $container;
+    private \SplQueue $queue;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct()
     {
         $this->queue = new \SplQueue();
-        $this->container = $container;
     }
 
     public function pipe(string|callable $middleware): void
@@ -29,8 +29,7 @@ class Pipeline
     {
         $next = new Next(
             clone $this->queue,
-            $controller,
-            $this->container
+            $controller
         );
         return $next($request);
     }

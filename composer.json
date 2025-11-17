@@ -5,7 +5,7 @@
     "scripts": {
         "serve": [
             "Composer\\Config::disableProcessTimeout",
-            "export XDEBUG_MODE=debug && export XDEBUG_TRIGGER=yes && php -S 0.0.0.0:8080 -t public"
+            "export XDEBUG_MODE=debug,develop && export XDEBUG_TRIGGER=yes && php -S 0.0.0.0:8080 -t public"
         ],
         "tests": "export XDEBUG_MODE=debug && export XDEBUG_TRIGGER=yes && php vendor/bin/phpunit"
     },

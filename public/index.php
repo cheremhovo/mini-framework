@@ -1,48 +1,46 @@
 <?php
 
+use Cheremhovo1990\Framework\App;
 use Cheremhovo1990\Framework\Container\Container;
+use Cheremhovo1990\Framework\Http\HandlerController;
 use Cheremhovo1990\Framework\Pipeline\Pipeline;
-use Cheremhovo1990\Framework\RequestHandlerWrapper;
 use Cheremhovo1990\Framework\Router\RouteCollection;
 use Cheremhovo1990\Framework\Router\Router;
-use Laminas\Diactoros\Response\HtmlResponse;
+use Laminas\Diactoros\Response\TextResponse;
 use Laminas\Diactoros\ServerRequestFactory;
 use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Test\Framework\Helpers\UrlHelper;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 ### Initialization
 
 $container = new Container();
-$routes = new RouteCollection();
+App::setContainer($container);
+App::setRootDirectory(realpath(__DIR__ . '/../'));
 
+$routeCollection = new RouteCollection();
 require __DIR__ . '/../config/routes.php';
+$router = new Router($routeCollection);
+UrlHelper::setRouter($router);
 
-$router = new Router($routes);
-$pipeline = new Pipeline($container);
-
+$pipeline = new Pipeline();
 require __DIR__ . '/../config/pipeline.php';
 
 ### Running
 $request = ServerRequestFactory::fromGlobals();
 
-/** @var callable $controller */
 $controller = $router->match($request);
-$controller = function (ServerRequestInterface $request) use ($controller, $container): ResponseInterface {
-    if (is_string($controller)) {
-        $controller = $container->get($controller);
-    }
-    $response = ($controller)($request);
-    if (!$response instanceof ResponseInterface) {
-        if (is_string($response)) {
-            $response = new HtmlResponse($response);
-        }
-    }
-    return $response;
-};
-$response = $pipeline($request, new RequestHandlerWrapper($controller));
+foreach ($controller->arguments as $key => $argument) {
+    $request = $request->withAttribute($key, $argument);
+}
+$handlerController = new HandlerController($controller);
+try {
+    $response = $pipeline($request, $handlerController);
+} catch (Throwable $e) {
+    $response = new TextResponse($e->getMessage());
+}
+
 
 ### Postprocessing
 

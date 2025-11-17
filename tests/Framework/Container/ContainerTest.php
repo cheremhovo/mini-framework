@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Test\Framework\Container;
 
 use Cheremhovo1990\Framework\Container\Container;
-use Cheremhovo1990\Framework\Container\NotFoundException;
+use Cheremhovo1990\Framework\Container\NotFoundServiceException;
 use PHPUnit\Framework\TestCase;
 
 class ContainerTest extends TestCase
@@ -62,7 +64,7 @@ class ContainerTest extends TestCase
     {
         $container = new Container();
 
-        $this->expectException(NotFoundException::class);
+        $this->expectException(NotFoundServiceException::class);
         $container->get('unknown');
     }
 }

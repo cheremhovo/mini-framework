@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Framework\Pipeline;
 
-use Cheremhovo1990\Framework\CallableMiddlewareWrapper;
+use Cheremhovo1990\Framework\App;
 use Cheremhovo1990\Framework\Container\Container;
+use Cheremhovo1990\Framework\Http\CallableMiddlewareWrapper;
+use Cheremhovo1990\Framework\Http\RequestHandlerWrapper;
 use Cheremhovo1990\Framework\Pipeline\Next;
-use Cheremhovo1990\Framework\RequestHandlerWrapper;
 use Laminas\Diactoros\Response\TextResponse;
 use Laminas\Diactoros\ServerRequest;
 use PHPUnit\Framework\TestCase;
@@ -16,6 +19,12 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class NextTest extends TestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+        App::setContainer(new Container());
+    }
+
     public function testEmptyQueue()
     {
         $expect = 'empty';
@@ -23,8 +32,7 @@ class NextTest extends TestCase
             new \SplQueue(),
             new RequestHandlerWrapper(function () use ($expect) {
                 return new TextResponse($expect);
-            }),
-            new Container(),
+            })
         );
         $response = $next(new ServerRequest());
         $this->assertEquals($expect, $response->getBody()->getContents());
@@ -42,8 +50,7 @@ class NextTest extends TestCase
             $queue,
             new RequestHandlerWrapper(function (){
                 return new TextResponse((string)5);
-            }),
-            new Container(),
+            })
         );
         $response = $next(new ServerRequest());
         $this->assertEquals(9, $response->getBody()->getContents());

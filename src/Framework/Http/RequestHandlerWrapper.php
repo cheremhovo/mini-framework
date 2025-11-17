@@ -1,6 +1,8 @@
 <?php
 
-namespace Cheremhovo1990\Framework;
+declare(strict_types=1);
+
+namespace Cheremhovo1990\Framework\Http;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

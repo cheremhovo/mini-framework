@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cheremhovo1990\Framework\Container;
 
 use Psr\Container\ContainerExceptionInterface;
@@ -37,10 +39,10 @@ class Container implements ContainerInterface
                     $class = $definition['class'];
                     $arguments = array_diff_key($definition, ['class' => null]);
                 } else {
-                    throw new NotFoundException('invalid declaration in service definition "' . $id . '"');
+                    throw new NotFoundServiceException('invalid declaration in service definition "' . $id . '"');
                 }
             } else {
-                throw new NotFoundException('invalid declaration in service definition "' . $id . '"');
+                throw new NotFoundServiceException('invalid declaration in service definition "' . $id . '"');
             }
         }
         if (class_exists($class)) {
@@ -64,7 +66,7 @@ class Container implements ContainerInterface
                             if (array_key_exists($name, $arguments)) {
                                 $params[] = $arguments[$name];
                             } else {
-                                throw new NotFoundException('Unable to resolve "'.$parameter->getName().'" in service "' . $id . '"');
+                                throw new NotFoundServiceException('Unable to resolve "'.$parameter->getName().'" in service "' . $id . '"');
                             }
                         }
                     }
@@ -72,7 +74,7 @@ class Container implements ContainerInterface
             }
             return $this->builds[$id] = new $class(...$params);
         }
-        throw new NotFoundException('Unknown service "' . $id . '"');
+        throw new NotFoundServiceException('Unknown service "' . $id . '"');
     }
 
     public function has(string $id): bool
