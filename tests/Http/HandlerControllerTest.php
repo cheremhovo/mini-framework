@@ -2,10 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Test\Framework\Http;
+namespace Test\Http;
 
-use Cheremhovo1990\Framework\App;
-use Cheremhovo1990\Framework\Container\Container;
 use Cheremhovo1990\Framework\Http\HandlerController;
 use Cheremhovo1990\Framework\Router\ResultRoute;
 use Laminas\Diactoros\ServerRequest;

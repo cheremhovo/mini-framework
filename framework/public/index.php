@@ -2,6 +2,7 @@
 
 use Cheremhovo1990\Framework\App;
 use Cheremhovo1990\Framework\Container\Container;
+use Cheremhovo1990\Framework\Helper\UrlHelper;
 use Cheremhovo1990\Framework\Http\HandlerController;
 use Cheremhovo1990\Framework\Pipeline\Pipeline;
 use Cheremhovo1990\Framework\Router\RouteCollection;
@@ -9,9 +10,9 @@ use Cheremhovo1990\Framework\Router\Router;
 use Laminas\Diactoros\Response\TextResponse;
 use Laminas\Diactoros\ServerRequestFactory;
 use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
-use Cheremhovo1990\Framework\Helper\UrlHelper;
 
-require __DIR__ . '/../vendor/autoload.php';
+
+require __DIR__ . '/../../vendor/autoload.php';
 
 ### Initialization
 

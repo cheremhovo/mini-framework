@@ -1,6 +1,6 @@
 <?php
 /**
- * @var $this \Cheremhovo1990\Framework\Http\BaseControllerAbstract
+ * @var $this \Http\BaseControllerAbstract
  * @var $title string
  */
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Test\Framework\Container;
+namespace Test\Container;
 
 use Cheremhovo1990\Framework\Container\Container;
 use Cheremhovo1990\Framework\Container\NotFoundServiceException;

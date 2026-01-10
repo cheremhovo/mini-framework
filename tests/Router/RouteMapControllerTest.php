@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Test\Framework\Router {
+namespace Test\Router {
 
     use App\Controller\MainController;
-    use App\Controller\NewsContactController;
     use App\Controller\NewsController;
+    use App\Controller\NewsContactController;
     use App\Controller\Post\DefaultController;
     use Cheremhovo1990\Framework\Router\RouterMapController;
     use PHPUnit\Framework\TestCase;

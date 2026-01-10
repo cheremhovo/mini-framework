@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Framework\Router;
+namespace Test\Router;
 
 use Cheremhovo1990\Framework\Router\Route;
 use Laminas\Diactoros\ServerRequest;

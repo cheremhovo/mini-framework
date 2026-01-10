@@ -1,6 +1,6 @@
 <?php
 
-/** @var Cheremhovo1990\Framework\Router\RouteCollection $routeCollection  */
+/** @var \Router\RouteCollection $routeCollection  */
 
 use Cheremhovo1990\Framework\App;
 use Cheremhovo1990\Framework\Helper\StringHelper;
@@ -17,13 +17,13 @@ $routeCollection->get('about.page', '/about/page/{id}', function (\Psr\Http\Mess
     return 'page ' . $request->getAttribute('id');
 }, ['requirements' => ['id' => '\w+']]);
 
-$paths = glob(__DIR__ . '/../src/App/Controller/*Controller.php');
-$paths = array_merge($paths, glob(__DIR__ . '/../src/App/Controller/*/*Controller.php'));
+$paths = glob(__DIR__ . '/../src/Controller/*Controller.php');
+$paths = array_merge($paths, glob(__DIR__ . '/../src/Controller/*/*Controller.php'));
 
 $classes = [];
 foreach ($paths as $path) {
     $path = realpath($path);
-    $class = StringHelper::replace(App::getRootDirectory('src/'), '', $path);
+    $class = StringHelper::replace(App::getRootDirectory('src/'), 'App/', $path);
     $class = StringHelper::replaceEnd('.php', "", $class);
     $class = StringHelper::replace(DIRECTORY_SEPARATOR, '\\', $class);
     $classes[] = $class;

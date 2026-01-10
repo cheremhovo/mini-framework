@@ -5,7 +5,7 @@
     "scripts": {
         "serve": [
             "Composer\\Config::disableProcessTimeout",
-            "export XDEBUG_MODE=debug,develop && export XDEBUG_TRIGGER=yes && php -S 0.0.0.0:8080 -t public"
+            "export XDEBUG_MODE=debug,develop && export XDEBUG_TRIGGER=yes && php -S 0.0.0.0:8080 -t framework/public"
         ],
         "tests": "export XDEBUG_MODE=debug && export XDEBUG_TRIGGER=yes && php vendor/bin/phpunit"
     },
@@ -23,8 +23,8 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/App/",
-            "Cheremhovo1990\\Framework\\": "src/Framework/"
+            "App\\": "framework/src/",
+            "Cheremhovo1990\\Framework\\": "src/"
         }
     },
     "autoload-dev": {
@@ -37,7 +37,7 @@
     },
     "authors": [
         {
-            "name": "Mokhtar Tlili",
+            "name": "Kozhukhov Ivan",
             "email": "cheremhovo1990@yandex.ru"
         }
     ],

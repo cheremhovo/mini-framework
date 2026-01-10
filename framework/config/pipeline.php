@@ -1,6 +1,6 @@
 <?php
 
-/** @var Cheremhovo1990\Framework\Pipeline\Pipeline $pipeline */
+/** @var \Pipeline\Pipeline $pipeline */
 
 use App\Middleware\ProfileMiddleware;
 use Psr\Http\Message\ResponseInterface;

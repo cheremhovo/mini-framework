@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Framework\Pipeline;
+namespace Test\Pipeline;
 
 use Cheremhovo1990\Framework\App;
 use Cheremhovo1990\Framework\Container\Container;

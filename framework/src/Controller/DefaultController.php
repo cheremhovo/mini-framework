@@ -10,7 +10,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Cheremhovo1990\Framework\Router\Attribute\Route;
 
 #[Route('default', '/')]
-class DefaultBaseController extends BaseControllerAbstract
+class DefaultController extends BaseControllerAbstract
 {
     public function __invoke(ServerRequestInterface $request)
     {

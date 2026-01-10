@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Test\Framework\Helper;
+namespace Test\Helper;
 
 use Cheremhovo1990\Framework\Helper\StringHelper;
 use PHPUnit\Framework\TestCase;
